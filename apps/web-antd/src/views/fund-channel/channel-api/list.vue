@@ -51,7 +51,7 @@ function showType(type: string) {
   const item = props.channelEnums.channelApiType?.find(
     (obj) => obj.code === type,
   );
-  return item === null ? type : `${item.name}(${type})`;
+  return item ? `${item.name}(${type})` : type;
 }
 
 const [Grid, gridApi] = useVbenVxeGrid({ gridOptions });
