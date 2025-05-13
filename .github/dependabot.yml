@@ -3,7 +3,8 @@ updates:
   - package-ecosystem: npm
     directory: '/'
     schedule:
-      interval: daily
+      interval: monthly
+    open-pull-requests-limit: 0  # 设置为 0，表示不打开 PR
     groups:
       non-breaking-changes:
         update-types: [minor, patch]
