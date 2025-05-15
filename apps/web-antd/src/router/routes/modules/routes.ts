@@ -213,6 +213,14 @@ const routes: RouteRecordRaw[] = [
           title: '支付测试',
         },
       },
+      {
+        name: 'DepositDemo',
+        path: '/demo/deposit',
+        component: () => import('#/views/demo/deposit.vue'),
+        meta: {
+          title: '充值测试',
+        },
+      },
     ],
   },
 ];

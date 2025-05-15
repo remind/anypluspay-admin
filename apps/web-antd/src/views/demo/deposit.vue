@@ -6,17 +6,12 @@ import { Page } from '@vben/common-ui';
 import { Card, Typography, TypographyParagraph } from 'ant-design-vue';
 
 import { useVbenForm } from '#/adapter/form';
-import { requestClient } from '#/api/request';
+import { openPostWindow } from '#/api';
 
 const createTradeResult = ref<any | null>(null);
 
 function onSubmit(values: Record<string, any>) {
-  requestClient
-    .post<any>('/demo/create-trade-order', values)
-    .then((response) => {
-      createTradeResult.value = response;
-      window.open(`/api/demo/cashier?tradeId=${response.tradeId}`, '_blank');
-    });
+  openPostWindow('/api/demo/deposit-cashier', values);
 }
 
 const [Form] = useVbenForm({
@@ -30,44 +25,30 @@ const [Form] = useVbenForm({
   schema: [
     {
       component: 'Input',
-      fieldName: 'merchantId',
+      fieldName: 'memberId',
       defaultValue: '100000003',
-      label: '商户号',
+      label: '会员ID',
       rules: 'required',
     },
     {
       component: 'Input',
-      fieldName: 'subject',
-      defaultValue: '测试subject',
-      label: '交易标题',
-      rules: 'required',
-    },
-    {
-      component: 'Input',
-      fieldName: 'goodsDesc',
-      defaultValue: '测试goods',
-      label: '商品描述',
+      fieldName: 'accountNo',
+      defaultValue: '200100200110000000315600001',
+      label: '账户号',
       rules: 'required',
     },
     {
       component: 'Input',
       fieldName: 'amount',
-      defaultValue: '1',
+      defaultValue: '50',
       label: '金额',
       rules: 'required',
     },
     {
       component: 'Input',
-      fieldName: 'payerId',
-      defaultValue: '100000002',
-      label: '付款人ID',
-      rules: 'required',
-    },
-    {
-      component: 'Input',
-      fieldName: 'payeeId',
-      defaultValue: '100000003',
-      label: '收款人ID',
+      fieldName: 'memo',
+      defaultValue: '测试充值',
+      label: '备注',
       rules: 'required',
     },
   ],
@@ -79,8 +60,8 @@ const [Form] = useVbenForm({
 <template>
   <Page
     content-class="flex flex-col gap-4"
-    description="1、创建交易；2、跳转收银台；3、选择支付方式支付。 交易状态：0-待支付，1-成功，2-失败"
-    title="支付测试"
+    description="1、填写充值信息；2、跳转收银台；3、选择支付方式支付。 充值不需要预创建订单，在支付时会自动创建充值订单。"
+    title="充值测试"
   >
     <Card title="支付">
       <Form />
