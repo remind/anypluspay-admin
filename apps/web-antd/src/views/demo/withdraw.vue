@@ -11,11 +11,9 @@ import { requestClient } from '#/api/request';
 const applyResult = ref<any | null>(null);
 
 function onSubmit(values: Record<string, any>) {
-  requestClient
-    .post<any>('/demo/withdraw/apply', values)
-    .then((response) => {
-      applyResult.value = response;
-    });
+  requestClient.post<any>('/demo/withdraw/apply', values).then((response) => {
+    applyResult.value = response;
+  });
 }
 
 const [Form] = useVbenForm({

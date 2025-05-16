@@ -1,12 +1,10 @@
 <script lang="ts" setup>
-
 import { Page } from '@vben/common-ui';
 
-import { Card} from 'ant-design-vue';
+import { Card } from 'ant-design-vue';
 
 import { useVbenForm } from '#/adapter/form';
 import { openPostWindow } from '#/api';
-
 
 function onSubmit(values: Record<string, any>) {
   openPostWindow('/api/demo/deposit-cashier', values);
