@@ -7,7 +7,7 @@ import { requestClient } from '#/api/request';
 const cardTypes: any = [
   {
     label: '所有',
-    value: '',
+    value: 'UNLIMITED',
   },
 ];
 

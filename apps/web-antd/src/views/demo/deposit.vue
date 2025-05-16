@@ -1,14 +1,12 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
 
 import { Page } from '@vben/common-ui';
 
-import { Card, Typography, TypographyParagraph } from 'ant-design-vue';
+import { Card} from 'ant-design-vue';
 
 import { useVbenForm } from '#/adapter/form';
 import { openPostWindow } from '#/api';
 
-const createTradeResult = ref<any | null>(null);
 
 function onSubmit(values: Record<string, any>) {
   openPostWindow('/api/demo/deposit-cashier', values);
@@ -63,11 +61,8 @@ const [Form] = useVbenForm({
     description="1、填写充值信息；2、跳转收银台；3、选择支付方式支付。 充值不需要预创建订单，在支付时会自动创建充值订单。"
     title="充值测试"
   >
-    <Card title="支付">
+    <Card title="充值">
       <Form />
-      <Typography>
-        <TypographyParagraph>{{ createTradeResult }}</TypographyParagraph>
-      </Typography>
     </Card>
   </Page>
 </template>

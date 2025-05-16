@@ -221,6 +221,14 @@ const routes: RouteRecordRaw[] = [
           title: '充值测试',
         },
       },
+      {
+        name: 'WithdrawDemo',
+        path: '/demo/withdraw',
+        component: () => import('#/views/demo/withdraw.vue'),
+        meta: {
+          title: '提现测试',
+        },
+      },
     ],
   },
 ];
