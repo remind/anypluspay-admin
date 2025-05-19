@@ -75,7 +75,6 @@ const [Grid] = useVbenVxeGrid({ formOptions, gridOptions });
 </script>
 <template>
   <Page auto-content-height>
-    <Grid>
-    </Grid>
+    <Grid />
   </Page>
 </template>
