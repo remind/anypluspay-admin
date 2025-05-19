@@ -23,6 +23,30 @@ const routes: RouteRecordRaw[] = [
           keepAlive: true,
         },
       },
+      {
+        name: 'PaymentAcquirerOrder',
+        path: '/payment/acquiring',
+        component: () => import('#/views/payment/acquiring/list.vue'),
+        meta: {
+          title: '收单订单',
+        },
+      },
+      {
+        name: 'PaymentDepositOrder',
+        path: '/payment/deposit',
+        component: () => import('#/views/payment/deposit/list.vue'),
+        meta: {
+          title: '充值订单',
+        },
+      },
+      {
+        name: 'PaymentWithdrawOrder',
+        path: '/payment/withdraw',
+        component: () => import('#/views/payment/withdraw/list.vue'),
+        meta: {
+          title: '提现订单',
+        },
+      },
     ],
   },
   {

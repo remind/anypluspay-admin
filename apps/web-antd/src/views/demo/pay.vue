@@ -15,7 +15,10 @@ function onSubmit(values: Record<string, any>) {
     .post<any>('/demo/create-trade-order', values)
     .then((response) => {
       createTradeResult.value = response;
-      window.open(`/api/demo/cashier?tradeId=${response.tradeId}`, '_blank');
+      window.open(
+        `/api/demo/cashier?paymentId=${response.paymentId}`,
+        '_blank',
+      );
     });
 }
 
@@ -30,9 +33,9 @@ const [Form] = useVbenForm({
   schema: [
     {
       component: 'Input',
-      fieldName: 'merchantId',
+      fieldName: 'partnerId',
       defaultValue: '100000003',
-      label: '商户号',
+      label: '合作方',
       rules: 'required',
     },
     {
@@ -40,13 +43,6 @@ const [Form] = useVbenForm({
       fieldName: 'subject',
       defaultValue: '测试subject',
       label: '交易标题',
-      rules: 'required',
-    },
-    {
-      component: 'Input',
-      fieldName: 'goodsDesc',
-      defaultValue: '测试goods',
-      label: '商品描述',
       rules: 'required',
     },
     {
