@@ -42,7 +42,7 @@ const [Form] = useVbenForm({
       component: 'Input',
       fieldName: 'subject',
       defaultValue: '测试subject',
-      label: '交易标题',
+      label: '标题',
       rules: 'required',
     },
     {

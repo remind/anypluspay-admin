@@ -23,7 +23,7 @@ const formOptions: VbenFormProps = {
     {
       component: 'Input',
       fieldName: 'paymentId',
-      label: '支付总单号',
+      label: '支付单号',
     },
   ],
   // 控制表单是否显示折叠按钮
@@ -38,8 +38,8 @@ const gridOptions: VxeGridProps<any> = {
     labelField: 'id',
   },
   columns: [
-    { field: 'paymentId', title: '支付总单号', align: 'left' },
-    { field: 'payOrderId', title: '支付单号', align: 'left' },
+    { field: 'paymentId', title: '支付单号', align: 'left' },
+    { field: 'payProcessId', title: '支付指令', align: 'left' },
     { field: 'memberId', title: '会员ID', align: 'left' },
     { field: 'accountNo', title: '账户', align: 'left' },
     { field: 'cardIdNo', title: '身份证号', align: 'left' },

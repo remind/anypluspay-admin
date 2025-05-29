@@ -7,11 +7,13 @@ import { useVbenForm } from '#/adapter/form';
 import { requestClient } from '#/api/request';
 
 async function onSubmit(values: Record<string, any>) {
-  requestClient.post<any>('/trade/order/refund', values).then((response) => {
-    message.success({
-      content: response,
+  requestClient
+    .post<any>('/payment/acquiring/refund', values)
+    .then((response) => {
+      message.success({
+        content: response,
+      });
     });
-  });
 }
 const [Form, formApi] = useVbenForm({
   handleSubmit: onSubmit,
@@ -27,8 +29,8 @@ const [Form, formApi] = useVbenForm({
       componentProps: {
         disabled: true,
       },
-      fieldName: 'tradeId',
-      label: '交易单号',
+      fieldName: 'paymentId',
+      label: '支付单号',
     },
     {
       component: 'Input',
@@ -55,11 +57,11 @@ const [Drawer, drawerApi] = useVbenDrawer({
   },
   onOpenChange(isOpen: boolean) {
     if (isOpen) {
-      const { tradeId } = drawerApi.getData<Record<string, any>>();
-      formApi.setValues({ tradeId });
+      const { paymentId } = drawerApi.getData<Record<string, any>>();
+      formApi.setValues({ paymentId });
     }
   },
-  title: '交易退款',
+  title: '退款',
 });
 </script>
 <template>

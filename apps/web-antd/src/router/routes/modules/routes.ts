@@ -83,7 +83,7 @@ const routes: RouteRecordRaw[] = [
   {
     component: BasicLayout,
     meta: {
-      icon: 'mdi:shield-key-outline',
+      icon: 'carbon:settings',
       order: 3,
       title: '支付配置',
     },
@@ -165,12 +165,21 @@ const routes: RouteRecordRaw[] = [
           keepAlive: true,
         },
       },
+      {
+        name: 'AccountingDailyList',
+        path: '/daily/list',
+        component: () => import('#/views/accounting/daily/list.vue'),
+        meta: {
+          title: '试算平衡',
+          keepAlive: true,
+        },
+      },
     ],
   },
   {
     component: BasicLayout,
     meta: {
-      icon: 'mdi:shield-key-outline',
+      icon: 'ion:layers-outline',
       order: 55,
       title: '账务管理',
     },
@@ -202,19 +211,19 @@ const routes: RouteRecordRaw[] = [
   {
     component: BasicLayout,
     meta: {
-      icon: 'ion:layers-outline',
-      order: 60,
-      title: '交易管理',
+      icon: 'carbon:settings',
+      order: 65,
+      title: '系统配置',
     },
-    name: 'Trade',
-    path: '/trade',
+    name: 'SystemManager',
+    path: '/system',
     children: [
       {
-        name: 'TradeOrder',
-        path: '/trade/order',
-        component: () => import('#/views/trade/list.vue'),
+        name: 'SysUserManager',
+        path: '/user/list',
+        component: () => import('#/views/system/user/list.vue'),
         meta: {
-          title: '交易订单',
+          title: '系统用户',
         },
       },
     ],
@@ -222,7 +231,7 @@ const routes: RouteRecordRaw[] = [
   {
     component: BasicLayout,
     meta: {
-      icon: 'ion:layers-outline',
+      icon: 'ic:baseline-view-in-ar',
       order: 100,
       title: '支付示例',
     },

@@ -13,14 +13,15 @@ import { getCodeNameValues } from '#/api';
 import { requestClient } from '#/api/request';
 
 import AddFormDrawer from './add.vue';
+import UpdatePasswordFormDrawer from './edit-password.vue';
 import UpdateFormDrawer from './edit.vue';
 
-const urlPrefix = '/payment/pay-method';
+const urlPrefix = '/system/user';
 
 const allEnums = ref<any | null>(null);
 
 onMounted(async () => {
-  getCodeNameValues('payModel,assetType,payMethodStatus').then((response) => {
+  getCodeNameValues('sysUserStatus').then((response) => {
     allEnums.value = response;
   });
 });
@@ -38,13 +39,13 @@ const formOptions: VbenFormProps = {
   schema: [
     {
       component: 'Input',
-      fieldName: 'code',
-      label: '编码',
+      fieldName: 'nickname',
+      label: '昵称',
     },
     {
       component: 'Input',
-      fieldName: 'name',
-      label: '名称',
+      fieldName: 'username',
+      label: '账户',
     },
   ],
   // 控制表单是否显示折叠按钮
@@ -59,11 +60,9 @@ const gridOptions: VxeGridProps<any> = {
     labelField: 'id',
   },
   columns: [
-    { field: 'code', title: '编码', align: 'left' },
-    { field: 'name', title: '名称', align: 'left' },
-    { field: 'payModelName', title: '支付模式', align: 'left' },
-    { field: 'assetTypeName', title: '资产类型', align: 'left' },
-    { field: 'payInst', title: '支付机构', align: 'left' },
+    { field: 'id', title: 'ID', align: 'left' },
+    { field: 'nickname', title: '昵称', align: 'left' },
+    { field: 'username', title: '账户', align: 'left' },
     { field: 'statusName', title: '状态', align: 'left' },
     { field: 'gmtCreate', title: '创建时间', align: 'left' },
     { field: 'gmtModified', title: '修改时间', align: 'left' },
@@ -116,13 +115,27 @@ const [EditDrawer, editDrawerApi] = useVbenDrawer({
   },
 });
 
-function openEditForm(code: string) {
-  editDrawerApi.setData({ allEnums: allEnums.value, code });
+function openEditForm(id: Number) {
+  editDrawerApi.setData({ allEnums: allEnums.value, id });
   editDrawerApi.open();
 }
 
-async function del(code: string) {
-  await requestClient.get(`${urlPrefix}/delete`, { params: { code } });
+const [EditPasswordDrawer, editPasswordDrawerApi] = useVbenDrawer({
+  connectedComponent: UpdatePasswordFormDrawer,
+  onOpenChange: (isOpen: boolean) => {
+    if (!isOpen) {
+      gridApi.reload();
+    }
+  },
+});
+
+function openEditPasswordForm(id: Number) {
+  editPasswordDrawerApi.setData({ id });
+  editPasswordDrawerApi.open();
+}
+
+async function del(id: Number) {
+  await requestClient.get(`${urlPrefix}/delete`, { params: { id } });
   gridApi.reload();
 }
 </script>
@@ -140,12 +153,15 @@ async function del(code: string) {
           <Button type="link">操作 </Button>
           <template #overlay>
             <Menu>
-              <MenuItem @click="openEditForm(row.code)">编辑</MenuItem>
+              <MenuItem @click="openEditForm(row.id)">编辑用户</MenuItem>
+              <MenuItem @click="openEditPasswordForm(row.id)">
+                修改密码
+              </MenuItem>
               <Popconfirm
-                :title="`确定删除${row.code}吗？`"
-                @confirm="del(row.code)"
+                :title="`确定删除${row.nickname}吗？`"
+                @confirm="del(row.id)"
               >
-                <MenuItem>删除</MenuItem>
+                <MenuItem>删除用户</MenuItem>
               </Popconfirm>
             </Menu>
           </template>
@@ -154,5 +170,6 @@ async function del(code: string) {
     </Grid>
     <AddDrawer />
     <EditDrawer />
+    <EditPasswordDrawer />
   </Page>
 </template>
