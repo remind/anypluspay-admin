@@ -72,7 +72,7 @@ const gridOptions: VxeGridProps<any> = {
   proxyConfig: {
     ajax: {
       // eslint-disable-next-line no-empty-pattern
-      query: async ({ }, formValues) => {
+      query: async ({}, formValues) => {
         const data = await getDataList(formValues);
         return {
           items: data,
